@@ -7,15 +7,28 @@
 // remove a Trend
 // remove all Trends
 
+const helper_pos = require("./helper_pos");
+
 const sql = require("./db.js");
+
 
 //constructor
 const Trend = function(trend){
     this.title = trend.title;
     this.description = trend.description;
+
+    this.category = trend.category;
+    this.probability = trend.probability;
+
+    let position = helper_pos(trend.category,trend.probability);
+    console.log("constructor " + position[0])
+
+    this.xpos = position[0];
+    this.ypos = position[1];
 };
 
 Trend.create = (newTrend, result) => {
+
     sql.query("INSERT INTO Content SET ?", newTrend, (err,res)=>{
         if(err){
             console.log("error: ", err);
