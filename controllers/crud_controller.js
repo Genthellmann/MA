@@ -12,11 +12,10 @@ exports.create = (req, res) => {
     const trend = new Trend({
         title: req.body.title,
         description: req.body.description,
-        // category: req.category,
-        // probability: req.probability,
-        category: "user",
-        probability: "low",
-
+        probability: req.body.probability,
+        category: req.body.category,
+        maturity: req.body.maturity,
+        impact: req.body.impact,
     });
     //Save trend in db
     Trend.create(trend,(err,data)=>{

@@ -1,9 +1,13 @@
 
 function helper_pos(category, prob){
+
+    //radius same as in Front End
+    const radius = 90;
+
     const R0 = 0;
-    const R1 = 20;
-    const R2 = 30;
-    const R3 = 40;
+    const R1 = radius/3;
+    const R2 = 2*radius/3;
+    const R3 = radius;
 
     let theta = 0;
     let dist = 0;

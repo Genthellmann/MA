@@ -16,9 +16,11 @@ const sql = require("./db.js");
 const Trend = function(trend){
     this.title = trend.title;
     this.description = trend.description;
-
     this.category = trend.category;
     this.probability = trend.probability;
+    this.impact = trend.impact;
+    this.maturity = trend.maturity;
+
 
     let position = helper_pos(trend.category,trend.probability);
     console.log("constructor " + position[0])
@@ -84,8 +86,8 @@ Trend.getAllCond = result => {
 };
 Trend.updateById = (id, trend, result) => {
     sql.query(
-        "UPDATE Content SET title = ?, description = ? WHERE id = ?",
-        [trend.title, trend.description, id],
+        "UPDATE Content SET title = ?, description = ?, category = ?, probability = ?, maturity = ?, impact = ? WHERE id = ?",
+        [trend.title, trend.description,trend.category, trend.probability, trend.maturity, trend.impact, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
