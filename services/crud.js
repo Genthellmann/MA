@@ -85,9 +85,15 @@ Trend.getAllCond = result => {
     });
 };
 Trend.updateById = (id, trend, result) => {
+    let position = helper_pos(trend.category,trend.probability);
+    //console.log("constructor " + position[0])
+
+    trend.xpos = position[0];
+    trend.ypos = position[1];
+
     sql.query(
-        "UPDATE Content SET title = ?, description = ?, category = ?, probability = ?, maturity = ?, impact = ? WHERE id = ?",
-        [trend.title, trend.description,trend.category, trend.probability, trend.maturity, trend.impact, id],
+        "UPDATE Content SET title = ?, description = ?, category = ?, probability = ?, maturity = ?, impact = ?, xpos=?, ypos=? WHERE id = ?",
+        [trend.title, trend.description,trend.category, trend.probability, trend.maturity, trend.impact, trend.xpos, trend.ypos, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);

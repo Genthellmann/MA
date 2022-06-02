@@ -2,12 +2,21 @@
 function helper_pos(category, prob){
 
     //radius same as in Front End
-    const radius = 90;
+    //! Frontend uses diameter
+    const radius = 45;
 
-    const R0 = 0;
-    const R1 = radius/3;
-    const R2 = 2*radius/3;
-    const R3 = radius;
+    //distance from Boarder should be at least Radius of smallest trend which is 45/12
+    //Inner circle: probability "high"
+    const R0 = radius/12;
+    const R1 = radius/3-radius/12;
+
+    //Middle circle: probability "medium"
+    const R2 = radius/3+radius/12
+    const R3 = 2*radius/3-radius/12;
+
+    //Outer Circle: probability "low"
+    const R4 = 2*radius/3+radius/12
+    const R5 = radius-radius/12;
 
     let theta = 0;
     let dist = 0;
@@ -33,11 +42,11 @@ function helper_pos(category, prob){
     }
 
     if(prob === "medium"){
-        dist = Math.sqrt(Math.random()*(R1**2-R2**2)+R2**2);
+        dist = Math.sqrt(Math.random()*(R2**2-R3**2)+R3**2);
     }
 
     if(prob === "low"){
-        dist = Math.sqrt(Math.random()*(R2**2-R3**2)+R3**2);
+        dist = Math.sqrt(Math.random()*(R4**2-R5**2)+R5**2);
     }
 
 
