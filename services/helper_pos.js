@@ -1,9 +1,8 @@
 
 function helper_pos(category, prob){
 
-    //radius same as in Front End
-    //! Frontend uses diameter
-    const radius = 45;
+
+    const radius = 90;
 
     //distance from Boarder should be at least Radius of smallest trend which is 45/12
     //Inner circle: probability "high"
@@ -21,21 +20,45 @@ function helper_pos(category, prob){
     let theta = 0;
     let dist = 0;
 
-
     if (category === "user"){
-        theta = (2/3)*Math.PI*Math.random();
-        console.log("theta:" + theta);
+        theta = (2/3)*Math.PI*Math.random() + Math.PI/6;
+        console.log("theta_helper:" + theta);
+        console.log("category_helper: " + category + " if user")
     }
     //category Market Environment
-    if (category === "menv"){
-        theta = (2/3)*Math.PI*Math.random() + (2/3)*Math.PI;
-        console.log("theta:" + theta);
+    if (category === "technology"){
+        theta = (2/3)*Math.PI*Math.random() + (5/6)*Math.PI;
+        console.log("theta_helper:" + theta);
+        console.log("category_helper: " + category + " if technology")
+
     }
     //category technology
-    if (category === "technology"){
-        theta = (2/3)*Math.PI*Math.random() + (4/3)*Math.PI;
-        console.log("theta:" + theta);
+    if (category === "menv"){
+        theta = (2/3)*Math.PI*Math.random() + (3/2)*Math.PI;
+        console.log("theta_helper:" + theta);
+        console.log("category_helper: " + category + " if menv")
+
     }
+
+    // if (category === "user"){
+    //     theta = (2/3)*Math.PI*Math.random();
+    //     console.log("theta_helper:" + theta);
+    //     console.log("category_helper: " + category + " if user")
+    // }
+    // //category Market Environment
+    // if (category === "menv"){
+    //     theta = (2/3)*Math.PI*Math.random() + (2/3)*Math.PI;
+    //     console.log("theta_helper:" + theta);
+    //     console.log("category_helper: " + category + " if menv")
+    //
+    // }
+    // //category technology
+    // if (category === "technology"){
+    //     theta = (2/3)*Math.PI*Math.random() + (4/3)*Math.PI;
+    //     console.log("theta_helper:" + theta);
+    //     console.log("category_helper: " + category + " if technology")
+    //
+    // }
 
     if(prob === "high"){
         dist = Math.sqrt(Math.random()*(R0**2-R1**2)+R1**2);
@@ -53,6 +76,9 @@ function helper_pos(category, prob){
 
     const x = dist * Math.cos(theta);
     const y = dist * Math.sin(theta);
+
+    console.log("x: " + x)
+    console.log("y: " + y)
 
     return ([x,y]);
 

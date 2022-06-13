@@ -20,16 +20,23 @@ const Trend = function(trend){
     this.probability = trend.probability;
     this.impact = trend.impact;
     this.maturity = trend.maturity;
+    this.xpos = null;
+    this.ypos = null;
 
 
-    let position = helper_pos(trend.category,trend.probability);
-    console.log("constructor " + position[0])
-
-    this.xpos = position[0];
-    this.ypos = position[1];
+    // let position = helper_pos(trend.category,trend.probability);
+    // console.log("constructor " + position[0])
+    //
+    // this.xpos = position[0];
+    // this.ypos = position[1];
 };
 
 Trend.create = (newTrend, result) => {
+    let position = helper_pos(newTrend.category,newTrend.probability);
+    //console.log("constructor " + position[0])
+
+    newTrend.xpos = position[0];
+    newTrend.ypos = position[1];
 
     sql.query("INSERT INTO Content SET ?", newTrend, (err,res)=>{
         if(err){
