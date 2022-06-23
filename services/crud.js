@@ -10,16 +10,19 @@
 const helper_pos = require("./helper_pos");
 
 const sql = require("./db.js");
+const Console = require("console");
 
 
 //constructor
 const Trend = function(trend){
     this.title = trend.title;
     this.description = trend.description;
+    this.implication = trend.implication;
     this.category = trend.category;
     this.probability = trend.probability;
     this.impact = trend.impact;
     this.maturity = trend.maturity;
+    this.picture = trend.picture;
     this.xpos = null;
     this.ypos = null;
 
@@ -39,6 +42,7 @@ Trend.create = (newTrend, result) => {
     newTrend.ypos = position[1];
 
     sql.query("INSERT INTO Content SET ?", newTrend, (err,res)=>{
+        console.log("sql: " + newTrend)
         if(err){
             console.log("error: ", err);
             result(err, null);
@@ -80,6 +84,7 @@ Trend.getAll = (title, result) => {
         result(null, res);
     });
 };
+
 Trend.getAllCond = result => {
     sql.query("SELECT * FROM Content WHERE Cond=true", (err, res) => {
         if (err) {
@@ -91,12 +96,15 @@ Trend.getAllCond = result => {
         result(null, res);
     });
 };
+
 Trend.updateById = (id, trend, result) => {
     let position = helper_pos(trend.category,trend.probability);
     //console.log("constructor " + position[0])
 
     trend.xpos = position[0];
     trend.ypos = position[1];
+
+    Console.log(trend.picture)
 
     sql.query(
         "UPDATE Content SET title = ?, description = ?, category = ?, probability = ?, maturity = ?, impact = ?, xpos=?, ypos=? WHERE id = ?",

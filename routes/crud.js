@@ -1,5 +1,5 @@
-const crud = require("../controllers/crud_controller.js");
 const router = require("express").Router();
+const crud = require("../controllers/crud_controller.js");
 
 // Create a new Tutorial
 router.post("/", crud.create);
@@ -23,5 +23,6 @@ router.delete("/:id", crud.delete);
 router.delete("/", crud.deleteAll);
 
 //app.use('/app/tutorials', router);
+
 
 module.exports = router;

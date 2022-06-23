@@ -22,21 +22,18 @@ function helper_pos(category, prob){
 
     if (category === "user"){
         theta = (2/3)*Math.PI*Math.random() + Math.PI/6;
-        console.log("theta_helper:" + theta);
-        console.log("category_helper: " + category + " if user")
+
     }
     //category Market Environment
     if (category === "technology"){
         theta = (2/3)*Math.PI*Math.random() + (5/6)*Math.PI;
-        console.log("theta_helper:" + theta);
-        console.log("category_helper: " + category + " if technology")
+
 
     }
     //category technology
     if (category === "menv"){
         theta = (2/3)*Math.PI*Math.random() + (3/2)*Math.PI;
-        console.log("theta_helper:" + theta);
-        console.log("category_helper: " + category + " if menv")
+
 
     }
 
@@ -77,8 +74,6 @@ function helper_pos(category, prob){
     const x = dist * Math.cos(theta);
     const y = dist * Math.sin(theta);
 
-    console.log("x: " + x)
-    console.log("y: " + y)
 
     return ([x,y]);
 

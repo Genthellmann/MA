@@ -1,14 +1,24 @@
 const express = require("express");
 const app = express();
-const crudRouter = require("./routes/crud");
-var cors = require('cors')
 
+//routes
+const crudRouter = require("./routes/crud");
+const img_web = require("./routes/web");
+
+
+//img database
+const img_db = require("./models");
+
+
+//get a globally available reference to your app's root directory.
+global.__basedir = __dirname;
 
 // const corsOption = {
 //     origin: "http://localhost:3000"
 // };
-// app.use(cors(corsOption));
 
+// app.use(cors(corsOption));
+var cors = require('cors')
 app.use(cors())
 
 //parse requests from type -application/json
@@ -18,12 +28,23 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 //simple route
-app.get("/",(req,res)=>{
-    res.json({message:"Welcome to Thellmann application!"});
-});
+// app.get("/",(req,res)=>{
+//     res.json({message:"Welcome to Trend Application!"});
+// });
 
 app.use("/crud", crudRouter);
-//require("./routes/crud.js")(app);
+app.use("/web", img_web);
+// app.use("/upload", img_web)
+
+// For image upload
+// app.use("/web", img_web);
+// const initRoutes = require("./routes/web");
+// initRoutes(app);
+
+// // img_db.sequelize.sync();
+// img_db.sequelize.sync({ force: true }).then(() => {
+//     console.log("Drop and re-sync db.");
+// });
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
@@ -32,6 +53,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).json({ message: err.message });
     return;
 });
+
 
 //set port, listen for requests
 const PORT = process.env.PORT || 3001;

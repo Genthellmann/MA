@@ -12,6 +12,7 @@ exports.create = (req, res) => {
     const trend = new Trend({
         title: req.body.title,
         description: req.body.description,
+        implication: req.body.implication,
         probability: req.body.probability,
         category: req.body.category,
         maturity: req.body.maturity,
@@ -26,6 +27,7 @@ exports.create = (req, res) => {
         else res.send(data);
     })
 };
+
 // Retrieve trend from db with condition
 exports.findAll = (req, res) => {
     const title = req.query.title;
@@ -58,6 +60,7 @@ exports.findOne = (req, res) => {
 exports.findAllPublished = (req, res) => {
 
 };
+
 // Update trend
 exports.update = (req, res) => {
     //request valid?
