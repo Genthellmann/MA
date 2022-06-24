@@ -8,7 +8,6 @@ const uploadFiles = async (req, res) => {
             return res.send(`You must select a file.`);
         }
         Image.create({
-            // id: 100,
             type: req.file.mimetype,
             name: req.file.originalname,
             trendID: req.query.id,
