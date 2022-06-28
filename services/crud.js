@@ -107,8 +107,8 @@ Trend.updateById = (id, trend, result) => {
     Console.log(trend.picture)
 
     sql.query(
-        "UPDATE Content SET title = ?, description = ?, category = ?, probability = ?, maturity = ?, impact = ?, xpos=?, ypos=? WHERE id = ?",
-        [trend.title, trend.description,trend.category, trend.probability, trend.maturity, trend.impact, trend.xpos, trend.ypos, id],
+        "UPDATE Content SET title = ?, description = ?, implication = ?, category = ?, probability = ?, maturity = ?, impact = ?, xpos=?, ypos=? WHERE id = ?",
+        [trend.title, trend.description,trend.implication, trend.category, trend.probability, trend.maturity, trend.impact, trend.xpos, trend.ypos, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
