@@ -1,7 +1,6 @@
 
 function helper_pos(category, prob){
 
-
     const radius = 90;
 
     //distance from Boarder should be at least Radius of smallest trend which is 45/12

@@ -7,7 +7,7 @@
 // remove a Trend
 // remove all Trends
 
-const helper_pos = require("./helper_pos");
+const helper_pos = require("../middleware/helper_pos");
 
 const sql = require("./db.js");
 const Console = require("console");
@@ -23,8 +23,8 @@ const Trend = function(trend){
     this.impact = trend.impact;
     this.maturity = trend.maturity;
     this.picture = trend.picture;
-    this.xpos = null;
-    this.ypos = null;
+    this.xpos = trend.xpos;
+    this.ypos = trend.ypos;
 
 
     // let position = helper_pos(trend.category,trend.probability);
@@ -42,7 +42,6 @@ Trend.create = (newTrend, result) => {
     newTrend.ypos = position[1];
 
     sql.query("INSERT INTO Content SET ?", newTrend, (err,res)=>{
-        console.log("sql: " + newTrend)
         if(err){
             console.log("error: ", err);
             result(err, null);
@@ -80,7 +79,6 @@ Trend.getAll = (title, result) => {
             result(null, err);
             return;
         }
-        console.log("trend: ", res);
         result(null, res);
     });
 };
@@ -98,13 +96,14 @@ Trend.getAllCond = result => {
 };
 
 Trend.updateById = (id, trend, result) => {
-    let position = helper_pos(trend.category,trend.probability);
-    //console.log("constructor " + position[0])
 
-    trend.xpos = position[0];
-    trend.ypos = position[1];
+        // let position = helper_pos(trend.category, trend.probability);
+        // //console.log("constructor " + position[0])
+        // console.log("trend changed")
+        // trend.xpos = position[0];
+        // trend.ypos = position[1];
 
-    Console.log(trend.picture)
+
 
     sql.query(
         "UPDATE Content SET title = ?, description = ?, implication = ?, category = ?, probability = ?, maturity = ?, impact = ?, xpos=?, ypos=? WHERE id = ?",
@@ -121,6 +120,8 @@ Trend.updateById = (id, trend, result) => {
                 return;
             }
             console.log("updated trend: ", { id: id, ...trend });
+            console.log("after update");
+            console.log(trend)
             result(null, { id: id, ...trend });
         }
     );

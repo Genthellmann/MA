@@ -17,6 +17,8 @@ exports.create = (req, res) => {
         category: req.body.category,
         maturity: req.body.maturity,
         impact: req.body.impact,
+        xpos: req.body.xpos,
+        ypos: req.body.ypos
     });
     //Save trend in db
     Trend.create(trend,(err,data)=>{
@@ -55,11 +57,11 @@ exports.findOne = (req, res) => {
         } else res.send(data);
     });
 };
-
-// find all trends with condition
-exports.findAllPublished = (req, res) => {
-
-};
+//
+// // find all trends with condition
+// exports.findAllPublished = (req, res) => {
+//
+// };
 
 // Update trend
 exports.update = (req, res) => {
@@ -69,8 +71,8 @@ exports.update = (req, res) => {
             message: "Content can not be empty"
         });
     }
-    console.log(req.body);
     Trend.updateById(req.params.id, new Trend(req.body), (err,data)=>{
+
         if(err){
             if(err === "not_found"){
                 res.status(404).send({
