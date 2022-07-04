@@ -1,21 +1,30 @@
+//user authentication
+require('dotenv').config()
+
+
 const express = require("express");
 const app = express();
 
 //routes
 const crudRouter = require("./routes/crud");
 const img_web = require("./routes/web");
+const position = require("./routes/position");
 
+//database
+const img_db = require("./models"); //connects to index.js in /models
+const content_db = require("./models")
 
-//img database
-const img_db = require("./models");
+//Sync database
+img_db.sequelize.sync({ alter: true }).then(() => {
 
+    console.log("Synced db.");
+})
+    .catch((err) => {
+        console.log("Failed to sync db: " + err.message);
+    });
 
 //get a globally available reference to your app's root directory.
 global.__basedir = __dirname;
-
-// const corsOption = {
-//     origin: "http://localhost:3000"
-// };
 
 // app.use(cors(corsOption));
 var cors = require('cors')
@@ -27,24 +36,27 @@ app.use(express.json());
 //parse requests from type -application/x-www-form-urlencoded
 app.use(express.urlencoded({extended:true}));
 
-//simple route
-// app.get("/",(req,res)=>{
-//     res.json({message:"Welcome to Trend Application!"});
-// });
-
+//routes
 app.use("/crud", crudRouter);
 app.use("/web", img_web);
-// app.use("/upload", img_web)
+app.use("/position", position);
 
-// For image upload
-// app.use("/web", img_web);
-// const initRoutes = require("./routes/web");
-// initRoutes(app);
+//get Authentication
+const posts = [
+    {
+        username: 'Johannes',
+        title: 'Post 1',
+    },
+    {
+        username: 'Jim',
+        title: 'Post 2',
+    }
+]
+const AuthenticateToken = require("./middleware/AuthenticateToken");
 
-// // img_db.sequelize.sync();
-// img_db.sequelize.sync({ force: true }).then(() => {
-//     console.log("Drop and re-sync db.");
-// });
+app.get('/posts',AuthenticateToken, (req,res)=>{
+    res.json(posts.filter(post => post.username === req.user.name))
+})
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
@@ -53,7 +65,6 @@ app.use((err, req, res, next) => {
     res.status(statusCode).json({ message: err.message });
     return;
 });
-
 
 //set port, listen for requests
 const PORT = process.env.PORT || 3001;

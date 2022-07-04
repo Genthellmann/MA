@@ -22,19 +22,3 @@ module.exports = (sequelize) => {
     return Image;
 };
 
-
-
-// let Image = sequelize.define('image', {
-//     id: {
-//         type: DataTypes.INTEGER,
-//     },
-//     type: {
-//         type: DataTypes.STRING,
-//     },
-//     name: {
-//         type: DataTypes.STRING,
-//     },
-//     data: {
-//         type: DataTypes.BLOB("long"),
-//     },
-// });

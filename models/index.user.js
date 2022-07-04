@@ -1,4 +1,4 @@
-const dbConfig = require("../config/sequelize_config");
+const dbConfig = require("../config/seq_user_config");
 // const Sequelize = require("sequelize");
 const { Sequelize } = require('@sequelize/core');
 
@@ -14,11 +14,9 @@ const sequelize = new Sequelize(dbConfig.db_img.database, dbConfig.db_img.user, 
         idle: dbConfig.db_img.pool.idle,
     },
 });
-const db = {};
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
-db.images = require("./image.model.js")(sequelize, Sequelize);
-db.content = require("./position.model")(sequelize, Sequelize);
-// db.user = require("../models/user.model")(sequelize, Sequelize);
+const userdb = {};
+userdb.Sequelize = Sequelize;
+userdb.sequelize = sequelize;
+userdb.user = require("../models/user.model")(sequelize, Sequelize);
 //TO DO: if necessary give user different Roles
-module.exports = db;
+module.exports = userdb;

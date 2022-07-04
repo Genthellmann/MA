@@ -1,9 +1,9 @@
-const img_config = {
+const seq_user_config = {
     db_img: {
         host: 'localhost',
         user: 'root',
         password: 'password',
-        database: 'trendsDB',
+        database: 'userDB',
         dialect: "mysql",
         pool: {
             max: 5,
@@ -14,4 +14,4 @@ const img_config = {
     },
 };
 
-module.exports = img_config;
+module.exports = seq_user_config;
