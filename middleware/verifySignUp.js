@@ -1,7 +1,7 @@
 const db = require("../models/index.user");
 const User = db.user;
 
-verifySignUp = (req,res,next)=>{
+function verifySignUp(req,res,next){
 // Username
     User.findOne({
         where: {

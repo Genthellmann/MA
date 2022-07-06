@@ -2,12 +2,8 @@ const db = require("../models/index.user");
 const User = db.user;
 //There are lots of operators to use for the where clause, available as Symbols from Op
 const { Op } = require("sequelize");
-var jwt = require("jsonwebtoken");
-var bcrypt = require("bcryptjs");
-
-function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
-}
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 exports.signup = (req,res) => {
     //Save User to Database
@@ -24,11 +20,15 @@ exports.signup = (req,res) => {
         });
 };
 
+//TO DO: Store Tokens in DB
+let refreshTokens = []
+
 exports.signin = (req,res) =>{
     User.findOne({
         where:{
             username: req.body.username
-        }
+        },
+        raw: true
     })
         .then(user => {
             if(!user){
@@ -52,4 +52,8 @@ exports.signin = (req,res) =>{
             res.status(500).send({message: err.message});
     });
 };
+
+function generateAccessToken(user) {
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'})
+}
 

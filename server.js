@@ -1,7 +1,6 @@
 //user authentication
 require('dotenv').config()
 
-
 const express = require("express");
 const app = express();
 
@@ -26,9 +25,10 @@ img_db.sequelize.sync({ alter: true }).then(() => {
 //get a globally available reference to your app's root directory.
 global.__basedir = __dirname;
 
-// app.use(cors(corsOption));
-var cors = require('cors')
-app.use(cors())
+// use cors
+const cors = require('cors')
+var corsOptions = { origin: "http://localhost:3000" };
+app.use(cors(corsOptions))
 
 //parse requests from type -application/json
 app.use(express.json());

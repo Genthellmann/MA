@@ -12,23 +12,32 @@ const authRouter = require("./routes/auth.routes");
 
 const AuthenticateToken = require("./middleware/AuthenticateToken");
 
+// parse requests of content-type - application/json
 app.use(express.json())
+
+//parse requests from type -application/x-www-form-urlencoded
+app.use(express.urlencoded({extended:true}));
+
+// use cors
+const cors = require('cors')
+var corsOptions = {origin: "http://localhost:3000"};
+app.use(cors(corsOptions))
 
 //TO DO: Store refresh token in db
 let refreshTokens = []
 
 app.use("/login", authRouter)
 
-// app.post('/token', (req, res) => {
-//     const refreshToken = req.body.token
-//     if (refreshToken == null) return res.sendStatus(401)
-//     if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
-//     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-//         if (err) return res.sendStatus(403)
-//         const accessToken = generateAccessToken({ name: user.name })
-//         res.json({ accessToken: accessToken })
-//     })
-// })
+app.post('/token', (req, res) => {
+    const refreshToken = req.body.token
+    if (refreshToken == null) return res.sendStatus(401)
+    if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403)
+        const accessToken = generateAccessToken({ name: user.name })
+        res.json({ accessToken: accessToken })
+    })
+})
 
 //TO DO Delete Tokens from DB
 app.delete('/logout', (req,res)=>{
@@ -37,17 +46,17 @@ app.delete('/logout', (req,res)=>{
     res.sendStatus(204)
 })
 
-// app.post('/login', (req, res) => {
-//     // Authenticate User
-//
-//     const username = req.body.username
-//     const user = { name: username }
-//
-//     const accessToken = generateAccessToken(user)
-//     const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-//     refreshTokens.push(refreshToken)
-//     res.json({ accessToken: accessToken, refreshToken: refreshToken })
-// })
+app.post('/login', (req, res) => {
+    // Authenticate User
+
+    const username = req.body.username
+    const user = { name: username }
+
+    const accessToken = generateAccessToken(user)
+    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+    refreshTokens.push(refreshToken)
+    res.json({ accessToken: accessToken, refreshToken: refreshToken })
+})
 
 function generateAccessToken(user) {
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
