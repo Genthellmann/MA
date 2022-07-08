@@ -1,25 +1,26 @@
 const router = require("express").Router();
 const crud = require("../controllers/crud_controller.js");
+const AuthenticateToken = require("../middleware/AuthenticateToken");
 
 // Create a new Trend
-router.post("/", crud.create);
+router.post("/", AuthenticateToken, crud.create);
 
 // Retrieve all Trend
-router.get("/", crud.findAll);
+router.get("/", AuthenticateToken, crud.findAll);
 
 // // Retrieve all published Trends
 // router.get("/published", crud.findAllPublished);
 
 // Retrieve a single Trend with id
-router.get("/:id", crud.findOne);
+router.get("/:id", AuthenticateToken, crud.findOne);
 
 // Update a Trend with id
-router.put("/:id", crud.update);
+router.put("/:id", AuthenticateToken, crud.update);
 
 // Delete a Trend with id
-router.delete("/:id", crud.delete);
+router.delete("/:id", AuthenticateToken, crud.delete);
 
 // Delete all Trends
-router.delete("/", crud.deleteAll);
+router.delete("/", AuthenticateToken, crud.deleteAll);
 
 module.exports = router;

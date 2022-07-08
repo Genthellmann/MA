@@ -41,6 +41,8 @@ app.use("/crud", crudRouter);
 app.use("/web", img_web);
 app.use("/position", position);
 
+//TO DO: remove later only for testing
+//===============================
 //get Authentication
 const posts = [
     {
@@ -57,6 +59,9 @@ const AuthenticateToken = require("./middleware/AuthenticateToken");
 app.get('/posts',AuthenticateToken, (req,res)=>{
     res.json(posts.filter(post => post.username === req.user.name))
 })
+//===============================
+
+
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {

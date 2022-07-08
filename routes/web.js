@@ -6,11 +6,12 @@ const uploadController = require("../controllers/upload");
 const returnController = require("../controllers/return");
 
 const pictureController = require("../controllers/picture")
+const AuthenticateToken = require("../middleware/AuthenticateToken");
 
 
 // router.get("/home", homeController.home);
-router.get("/upload", pictureController.returnFiles);
-router.post("/upload", upload.single("file"), pictureController.uploadFiles);
-router.delete("/upload", pictureController.delete);
-router.delete("/", pictureController.deleteAll)
+router.get("/upload", AuthenticateToken, pictureController.returnFiles);
+router.post("/upload", AuthenticateToken, upload.single("file"), pictureController.uploadFiles);
+router.delete("/upload", AuthenticateToken, pictureController.delete);
+router.delete("/", AuthenticateToken, pictureController.deleteAll)
 module.exports = router;
