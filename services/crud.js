@@ -25,13 +25,6 @@ const Trend = function(trend){
     this.picture = trend.picture;
     this.xpos = trend.xpos;
     this.ypos = trend.ypos;
-
-
-    // let position = helper_pos(trend.category,trend.probability);
-    // console.log("constructor " + position[0])
-    //
-    // this.xpos = position[0];
-    // this.ypos = position[1];
 };
 
 Trend.create = (newTrend, result) => {
@@ -83,28 +76,21 @@ Trend.getAll = (title, result) => {
     });
 };
 
-Trend.getAllCond = result => {
-    sql.query("SELECT * FROM Content WHERE Cond=true", (err, res) => {
+Trend.getAllCond = (req, result) => {
+    console.log(req.body)
+    console.log(`SELECT * FROM Content WHERE category=${(req.body?.category ? req.body.category : "category")}`)
+    sql.query(`SELECT * FROM Content WHERE category=${(req.body?.category ? ('"' + req.body.category + '"') : "category")}`, (err, res) => {
+
         if (err) {
             console.log("error: ", err);
             result(null, err);
             return;
         }
-        console.log("trend: ", res);
         result(null, res);
     });
 };
 
 Trend.updateById = (id, trend, result) => {
-
-        // let position = helper_pos(trend.category, trend.probability);
-        // //console.log("constructor " + position[0])
-        // console.log("trend changed")
-        // trend.xpos = position[0];
-        // trend.ypos = position[1];
-
-
-
     sql.query(
         "UPDATE Content SET title = ?, description = ?, implication = ?, category = ?, probability = ?, maturity = ?, impact = ?, xpos=?, ypos=? WHERE id = ?",
         [trend.title, trend.description,trend.implication, trend.category, trend.probability, trend.maturity, trend.impact, trend.xpos, trend.ypos, id],

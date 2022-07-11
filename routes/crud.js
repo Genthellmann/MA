@@ -14,6 +14,9 @@ router.get("/", AuthenticateToken, crud.findAll);
 // Retrieve a single Trend with id
 router.get("/:id", AuthenticateToken, crud.findOne);
 
+// //Retrieve Trend with condition
+router.post("/cond", AuthenticateToken, crud.findAllCond);
+
 // Update a Trend with id
 router.put("/:id", AuthenticateToken, crud.update);
 

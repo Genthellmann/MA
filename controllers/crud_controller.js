@@ -41,6 +41,7 @@ exports.findAll = (req, res) => {
         else res.send(data);
     });
 };
+
 // Find single trend with ID
 exports.findOne = (req, res) => {
     Trend.findById(req.params.id,(err,data)=>{
@@ -57,11 +58,23 @@ exports.findOne = (req, res) => {
         } else res.send(data);
     });
 };
-//
-// // find all trends with condition
-// exports.findAllPublished = (req, res) => {
-//
-// };
+
+
+// find all trends with condition
+exports.findAllCond = (req, res) => {
+    if(!req.body){
+        res.status(400).send({
+            message: "Content can not be empty"
+        });
+    }
+    console.log(req.body)
+    Trend.getAllCond(req, (err, data)=>{
+        if(err){
+            console.log(err)
+            res.send(500)
+        }else res.send(data)
+    })
+};
 
 // Update trend
 exports.update = (req, res) => {
@@ -72,7 +85,6 @@ exports.update = (req, res) => {
         });
     }
     Trend.updateById(req.params.id, new Trend(req.body), (err,data)=>{
-
         if(err){
             if(err === "not_found"){
                 res.status(404).send({
