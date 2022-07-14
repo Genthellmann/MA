@@ -11,7 +11,7 @@ const AuthenticateToken = require("../middleware/AuthenticateToken");
 
 // router.get("/home", homeController.home);
 router.get("/upload", AuthenticateToken, pictureController.returnFiles);
-router.post("/upload", AuthenticateToken, upload.single("file"), pictureController.uploadFiles);
+router.post("/upload", upload.single("file"), pictureController.uploadFiles);
 router.delete("/upload", AuthenticateToken, pictureController.delete);
 router.delete("/", AuthenticateToken, pictureController.deleteAll)
 module.exports = router;

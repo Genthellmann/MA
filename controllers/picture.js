@@ -3,6 +3,8 @@ const db = require("../models");
 const Image = db.images;
 
 exports.uploadFiles = async (req, res) => {
+    console.log(req.file)
+    console.log(req.body)
     try {
         if (req.file == undefined) {
             return res.send(`You must select a file.`);

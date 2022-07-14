@@ -1,9 +1,10 @@
 const {Sequelize, DataTypes} = require('@sequelize/core');
 
 module.exports = (sequelize) => {
-    const Position = sequelize.define('position', {
+    const Content = sequelize.define('position', {
         id: {
             type: DataTypes.INTEGER,
+            autoIncrement: true,
             primaryKey: true,
         },
         title:{
@@ -14,9 +15,6 @@ module.exports = (sequelize) => {
         },
         implication:{
             type: DataTypes.TEXT('long'),
-        },
-        picture:{
-            type: DataTypes.BLOB,
         },
         probability:{
             type: DataTypes.STRING,
@@ -30,9 +28,6 @@ module.exports = (sequelize) => {
         category: {
             type: DataTypes.STRING,
         },
-        position: {
-            type: DataTypes.STRING,
-        },
         xpos: {
             type: DataTypes.FLOAT,
         },
@@ -41,8 +36,7 @@ module.exports = (sequelize) => {
         }},
         {
             tableName: 'Content',
-            timestamps: false
         }
     );
-    return Position;
+    return Content;
 };

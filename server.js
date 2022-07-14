@@ -10,11 +10,17 @@ const img_web = require("./routes/web");
 const position = require("./routes/position");
 
 //database
-const img_db = require("./models"); //connects to index.js in /models
-const content_db = require("./models")
+const db = require("./models"); //connects to index.js in /models
 
 //Sync database
-img_db.sequelize.sync({ alter: true }).then(() => {
+
+/*
+User.sync() - This creates the table if it doesn't exist (and does nothing if it already exists)
+User.sync({ force: true }) - This creates the table, dropping it first if it already existed
+User.sync({ alter: true }) - This checks what is the current state of the table in the database (which columns it has, what are their data types, etc), and then performs the necessary changes in the table to make it match the model.
+*/
+
+db.sequelize.sync().then(() => {
 
     console.log("Synced db.");
 })
@@ -41,25 +47,26 @@ app.use("/crud", crudRouter);
 app.use("/web", img_web);
 app.use("/position", position);
 
-//TO DO: remove later only for testing
-//===============================
-//get Authentication
-const posts = [
-    {
-        username: 'Johannes',
-        title: 'Post 1',
-    },
-    {
-        username: 'Jim',
-        title: 'Post 2',
-    }
-]
-const AuthenticateToken = require("./middleware/AuthenticateToken");
-
-app.get('/posts',AuthenticateToken, (req,res)=>{
-    res.json(posts.filter(post => post.username === req.user.name))
-})
-//===============================
+// //TO DO: remove later only for testing
+// //===============================
+// //get Authentication
+// const posts = [
+//     {
+//         username: 'Johannes',
+//         title: 'Post 1',
+//     },
+//     {
+//         username: 'Jim',
+//         title: 'Post 2',
+//     }
+// ]
+//
+// const AuthenticateToken = require("./middleware/AuthenticateToken");
+//
+// app.get('/posts',AuthenticateToken, (req,res)=>{
+//     res.json(posts.filter(post => post.username === req.user.name))
+// })
+// //===============================
 
 
 
