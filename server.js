@@ -8,6 +8,7 @@ const app = express();
 const crudRouter = require("./routes/crud");
 const img_web = require("./routes/web");
 const position = require("./routes/position");
+const projectRouter = require("./routes/project.routes");
 
 //database
 const db = require("./models"); //connects to index.js in /models
@@ -46,6 +47,7 @@ app.use(express.urlencoded({extended:true}));
 app.use("/crud", crudRouter);
 app.use("/web", img_web);
 app.use("/position", position);
+app.use("/projects", projectRouter);
 
 // //TO DO: remove later only for testing
 // //===============================

@@ -5,9 +5,10 @@ const {Op} = require("sequelize")
 const helper_pos = require("../middleware/helper_pos");
 
 exports.create = (req,res) => {
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-    console.log("create token " + token)
+    // const authHeader = req.headers['authorization']
+    // const token = authHeader && authHeader.split(' ')[1]
+    // console.log("create token " + token)
+
     //Validate request
     if(!req.body.title){
         res.status(400).send({

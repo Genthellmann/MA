@@ -19,6 +19,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.images = require("./image.model.js")(sequelize, Sequelize);
 db.content = require("./content.model")(sequelize, Sequelize);
+db.project = require("./project.model")(sequelize,Sequelize);
 // db.user = require("../models/user.model")(sequelize, Sequelize);
 //TO DO: if necessary give user different Roles
 module.exports = db;
