@@ -30,6 +30,7 @@ exports.create = (req,res) => {
             impact:req.body.impact,
             maturity:req.body.maturity,
             category:req.body.category,
+            project: req.body.project,
             xpos: x_pos,
             ypos: y_pos,
     };

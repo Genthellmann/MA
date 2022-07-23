@@ -64,7 +64,7 @@ function generateAccessToken(user) {
 
 //connect to userdb
 const user_db = require("./models/index.user")
-user_db.sequelize.sync({alter: true}).then(()=>{
+user_db.sequelize.sync({force: true}).then(()=>{
     console.log("Synced UserDB.");
 })
     .catch((err)=>{

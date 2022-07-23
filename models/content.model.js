@@ -28,6 +28,9 @@ module.exports = (sequelize) => {
         category: {
             type: DataTypes.STRING,
         },
+        project: {
+            type: DataTypes.INTEGER,
+        },
         xpos: {
             type: DataTypes.FLOAT,
         },

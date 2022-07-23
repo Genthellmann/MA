@@ -1,6 +1,7 @@
 const db = require("../models")
 const Project = db.project;
-const {Op} = require("sequelize")
+const sequelize = db.sequelize;
+const {Op, QueryTypes} = require("sequelize")
 const helper_pos = require("../middleware/helper_pos");
 
 exports.create = (req,res) => {
@@ -34,13 +35,31 @@ exports.create = (req,res) => {
         });
 };
 
+// exports.findAll = (req, res) => {
+//     console.log(req.query.title)
+//     const title = req.query.title;
+//     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+//     console.log(condition)
+//     Project.findAll({ where: condition })
+//         .then(data => {
+//             res.send(data);
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//                 message:
+//                     err.message || "Error occurred while retrieving Project."
+//             });
+//         });
+// };
+
 exports.findAll = (req, res) => {
-    console.log(req.query.title)
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-    console.log(condition)
-    Project.findAll({ where: condition })
-        .then(data => {
+    console.log(req.params)
+    let sql = `select * from projects where  ${req.params.id} member of (users->"$.users[*].id")`;
+    console.log(sql)
+    sequelize.query(sql,
+        {
+        type: QueryTypes.SELECT
+        }).then(data => {
             res.send(data);
         })
         .catch(err => {

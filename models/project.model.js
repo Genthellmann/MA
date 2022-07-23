@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
             description:{
                 type: DataTypes.TEXT('long'),
             },
-            user:{
+            users:{
                 type: DataTypes.JSON,
             }
     }

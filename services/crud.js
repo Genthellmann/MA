@@ -22,6 +22,7 @@ const Trend = function(trend){
     this.probability = trend.probability;
     this.impact = trend.impact;
     this.maturity = trend.maturity;
+    this.project = trend.project;
     this.xpos = trend.xpos;
     this.ypos = trend.ypos;
 };

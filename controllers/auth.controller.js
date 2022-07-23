@@ -47,13 +47,13 @@ exports.signin = (req,res) =>{
             const accessToken = generateAccessToken(user)
             const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
             refreshTokens.push(refreshToken)
-            res.json({ username: user.username, email: user.email, accessToken: accessToken, refreshToken: refreshToken })
+            res.json({ id:user.id, username: user.username, email: user.email, accessToken: accessToken, refreshToken: refreshToken })
         }).catch(err => {
             res.status(500).send({message: err.message});
     });
 };
 
 function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15000s'})
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '31536000s'})
 }
 

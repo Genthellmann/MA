@@ -6,7 +6,7 @@ const AuthenticateToken = require("../middleware/AuthenticateToken");
 router.post("/", AuthenticateToken, project.create);
 
 // Retrieve all Project for User
-router.get("/", AuthenticateToken, project.findAll);
+router.get("/:id", AuthenticateToken, project.findAll);
 
 // Update Project properties, i.e. who has access to project
 //Also delete project for specific user
