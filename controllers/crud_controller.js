@@ -5,9 +5,6 @@ const {Op} = require("sequelize")
 const helper_pos = require("../middleware/helper_pos");
 
 exports.create = (req,res) => {
-    // const authHeader = req.headers['authorization']
-    // const token = authHeader && authHeader.split(' ')[1]
-    // console.log("create token " + token)
 
     //Validate request
     if(!req.body.title){
@@ -47,10 +44,30 @@ exports.create = (req,res) => {
         });
 };
 
+// exports.findAll = (req, res) => {
+//     console.log(req.query.title)
+//     const title = req.query.title;
+//     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+//     console.log(condition)
+//     Trend.findAll({ where: condition })
+//         .then(data => {
+//             res.send(data);
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//                 message:
+//                     err.message || "Error occurred while retrieving Trend."
+//             });
+//         });
+// };
+
+
+//find all trends belonging to project with id:
 exports.findAll = (req, res) => {
-    console.log(req.query.title)
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+    console.log("query")
+    console.log(req.query.project)
+    const project = req.query.project;
+    var condition =  { project: { [Op.eq]: project } };
     console.log(condition)
     Trend.findAll({ where: condition })
         .then(data => {
@@ -130,8 +147,12 @@ exports.delete = (req, res) => {
 };
 
 exports.deleteAll = (req, res) => {
+    console.log("query")
+    console.log(req.query)
+    const project = req.query.project;
+    var condition =  { project: { [Op.eq]: project } };
     Trend.destroy({
-        where: {},
+        where: condition,
         truncate: false
     })
         .then(nums => {

@@ -5,7 +5,7 @@ const AuthenticateToken = require("../middleware/AuthenticateToken");
 // Create a new Trend
 router.post("/", AuthenticateToken, crud.create);
 
-// Retrieve all Trend
+// Retrieve all Trends
 router.get("/", AuthenticateToken, crud.findAll);
 
 // Retrieve a single Trend with id

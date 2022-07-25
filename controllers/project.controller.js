@@ -55,7 +55,6 @@ exports.create = (req,res) => {
 exports.findAll = (req, res) => {
     console.log(req.params)
     let sql = `select * from projects where  ${req.params.id} member of (users->"$.users[*].id")`;
-    console.log(sql)
     sequelize.query(sql,
         {
         type: QueryTypes.SELECT
