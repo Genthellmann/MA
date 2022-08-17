@@ -1,3 +1,4 @@
+/*
 const db = require("../models");
 const Image = db.images;
 
@@ -14,4 +15,4 @@ const returnFiles = async (req, res) => {
         return res.send(`Error when trying to return image: ${error}`);
     }
 };
-module.exports = {returnFiles};
+module.exports = {returnFiles};*/

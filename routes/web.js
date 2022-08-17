@@ -1,9 +1,6 @@
 const router = require("express").Router();
 const upload = require("../middleware/upload");
 
-const homeController = require("../controllers/home");
-const uploadController = require("../controllers/upload");
-const returnController = require("../controllers/return");
 
 const pictureController = require("../controllers/picture")
 const AuthenticateToken = require("../middleware/AuthenticateToken");

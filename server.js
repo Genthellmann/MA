@@ -9,6 +9,10 @@ const crudRouter = require("./routes/crud");
 const img_web = require("./routes/web");
 const position = require("./routes/position");
 const projectRouter = require("./routes/project.routes");
+const referenceRouter = require("./routes/reference.routes");
+const explpictureRouter = require("./routes/explpicture.routes");
+const rppictureRouter = require("./routes/rppicture.routes");
+
 
 //database
 const db = require("./models"); //connects to index.js in /models
@@ -48,27 +52,9 @@ app.use("/crud", crudRouter);
 app.use("/web", img_web);
 app.use("/position", position);
 app.use("/projects", projectRouter);
-
-// //TO DO: remove later only for testing
-// //===============================
-// //get Authentication
-// const posts = [
-//     {
-//         username: 'Johannes',
-//         title: 'Post 1',
-//     },
-//     {
-//         username: 'Jim',
-//         title: 'Post 2',
-//     }
-// ]
-//
-// const AuthenticateToken = require("./middleware/AuthenticateToken");
-//
-// app.get('/posts',AuthenticateToken, (req,res)=>{
-//     res.json(posts.filter(post => post.username === req.user.name))
-// })
-// //===============================
+app.use("/reference", referenceRouter);
+app.use("/explpicture", explpictureRouter);
+app.use("/rppicture", rppictureRouter);
 
 
 

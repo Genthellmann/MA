@@ -1,5 +1,4 @@
 const db = require("../models")
-// const {DataTypes} = require("@sequelize/core/types");
 const Trend = db.content;
 const {Op} = require("sequelize")
 const helper_pos = require("../middleware/helper_pos");
@@ -64,8 +63,6 @@ exports.create = (req,res) => {
 
 //find all trends belonging to project with id:
 exports.findAll = (req, res) => {
-    console.log("query")
-    console.log(req.query.project)
     const project = req.query.project;
     var condition =  { project: { [Op.eq]: project } };
     console.log(condition)
