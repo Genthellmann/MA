@@ -3,6 +3,7 @@ const db = require("../models");
 const Explpicture = db.explpicture;
 
 exports.uploadPicture = async (req, res) => {
+    console.log(req.file)
     try {
         if (req.file == undefined) {
             return res.send(`You must select a file.`);
@@ -10,7 +11,8 @@ exports.uploadPicture = async (req, res) => {
         Explpicture.create({
             type: req.file.mimetype,
             name: req.file.originalname,
-            trendID: req.query.id,
+            trendID: req.query.trendID,
+            refID: req.query.refID,
             data: fs.readFileSync(
                 __basedir + "/resources/static/assets/uploads/" + req.file.filename
             ),

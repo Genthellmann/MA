@@ -2,7 +2,7 @@ const router = require("express").Router();
 const upload = require("../middleware/upload");
 
 
-const pictureController = require("../controllers/picture")
+const pictureController = require("../controllers/picture.controller")
 const AuthenticateToken = require("../middleware/AuthenticateToken");
 
 

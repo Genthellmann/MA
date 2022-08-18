@@ -1,25 +1,28 @@
 const fs = require("fs");
 const db = require("../models");
+const {query} = require("express");
 const Rppicture = db.rppicture;
 
 exports.uploadPicture = async (req, res) => {
+
     try {
         if (req.file == undefined) {
             return res.send(`You must select a file.`);
         }
-        Rppicture.create({
+        Rppicture.upsert({
             type: req.file.mimetype,
             name: req.file.originalname,
-            trendID: req.query.id,
+            trendID: req.query.trendID,
+            refID: req.query.refID,
             data: fs.readFileSync(
                 __basedir + "/resources/static/assets/uploads/" + req.file.filename
             ),
-        }).then((rppicture) => {
+        }).then(([rppicture, created]) => {
             fs.writeFileSync(
                 __basedir + "/resources/static/assets/tmp/" + rppicture.name,
                 rppicture.data
             );
-            return res.send(`File has been uploaded.`);
+            return res.send(`File has been uploaded: ` + created);
         });
     } catch (error) {
         console.log(error);

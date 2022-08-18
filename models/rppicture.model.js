@@ -13,6 +13,12 @@ module.exports = (sequelize) => {
         },
         trendID: {
             type: DataTypes.INTEGER,
+        },
+        refID: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: false,
+
         }
     });
     return Rppicture;

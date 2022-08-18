@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            trend: {
+            trendID: {
                 type: DataTypes.INTEGER,
             },
             rproduct:{

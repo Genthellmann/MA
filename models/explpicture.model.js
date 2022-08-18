@@ -13,6 +13,9 @@ module.exports = (sequelize) => {
         },
         trendID: {
             type: DataTypes.INTEGER,
+        },
+        refID: {
+            type: DataTypes.INTEGER,
         }
     });
     return Explpicture;

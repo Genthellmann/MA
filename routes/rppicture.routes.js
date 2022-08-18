@@ -8,11 +8,11 @@ const AuthenticateToken = require("../middleware/AuthenticateToken");
 
 // router.get("/home", homeController.home);
 //get / create / delete  explpicture for reference product id
-router.get("/:id", AuthenticateToken, rppictureController.returnPicture);
-router.post("/:id", upload.single("file"), rppictureController.uploadPicture);
-router.delete("/:id", AuthenticateToken, rppictureController.deletePicture);
+router.get("", AuthenticateToken, rppictureController.returnPicture);
+router.post("", upload.single("file"), rppictureController.uploadPicture);
+router.delete("", AuthenticateToken, rppictureController.deletePicture);
 
 // delete all picture for trend id:
-router.delete("/all/:id", AuthenticateToken, rppictureController.deleteAllPictures)
+router.delete("/all", AuthenticateToken, rppictureController.deleteAllPictures)
 
 module.exports = router;

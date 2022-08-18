@@ -9,15 +9,17 @@ exports.create = (req,res) => {
     // console.log("create token " + token)
 
     //Validate request
-    if(!req.body.trend){
+    if(!req.body.rproduct){
         res.status(400).send({
             message: "Content can not be empty!"
         });
         return;
     }
 
+    console.log(req.body)
+
     const reference = {
-        trend: req.body.trend,
+        trendID: req.body.trendID,
         rproduct: req.body.rproduct,
         rsystemelements: req.body.rsystemelements,
         usabilityattributes: req.body.usabilityattributes,
