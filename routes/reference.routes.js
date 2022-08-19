@@ -14,5 +14,8 @@ router.delete("/:id", AuthenticateToken, referenceController.delete);
 // Retrieve all reference products for trend with id
 router.get("/all/:id", AuthenticateToken, referenceController.findAll);
 
+// Retrieve all reference with id
+router.get("/:id", AuthenticateToken, referenceController.findOne);
+
 
 module.exports = router;

@@ -40,6 +40,7 @@ exports.create = (req,res) => {
 
 exports.update = (req, res) => {
     const id = req.params.id;
+    console.log(req.params.id)
     Reference.update(req.body, {
         where: { id: id }
     })
@@ -87,8 +88,8 @@ exports.delete = (req, res) => {
 exports.findAll = (req, res) => {
     console.log("query")
     console.log(req.params.id)
-    const trend = req.params.id;
-    var condition =  { trend: { [Op.eq]: trend } };
+    const trendID = req.params.id;
+    var condition =  { trendID: { [Op.eq]: trendID } };
     Reference.findAll({ where: condition })
         .then(data => {
             res.send(data);
@@ -97,6 +98,22 @@ exports.findAll = (req, res) => {
             res.status(500).send({
                 message:
                     err.message || "Error occurred while retrieving Reference Product."
+            });
+        });
+};
+
+exports.findOne = (req, res) => {
+    console.log("query")
+    console.log(req.params.id)
+    const refID = req.params.id;
+    Reference.findByPk(refID)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    `Error occurred while retrieving Reference id=${refID}.`
             });
         });
 };

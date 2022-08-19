@@ -22,7 +22,7 @@ exports.uploadPicture = async (req, res) => {
                 __basedir + "/resources/static/assets/tmp/" + rppicture.name,
                 rppicture.data
             );
-            return res.send(`File has been uploaded: ` + created);
+            return res.send("File upload sucessful.");
         });
     } catch (error) {
         console.log(error);
@@ -38,6 +38,17 @@ exports.returnPicture = async (req, res) => {
                 trendID: req.query.trendID,
             }
         }).then((result) => res.json(result))
+    } catch (error) {
+        console.log(error);
+        return res.send(`Error when trying to return image: ${error}`);
+    }
+};
+
+exports.returnOnePicture = async (req, res) => {
+    const id = req.params.id;
+    try {
+        Rppicture.findByPk(id)
+            .then((result) => res.json(result))
     } catch (error) {
         console.log(error);
         return res.send(`Error when trying to return image: ${error}`);

@@ -7,19 +7,19 @@ exports.uploadFiles = async (req, res) => {
         if (req.file == undefined) {
             return res.status(400).send({ message: "You must select a file."});
         }
-        Image.create({
+        Image.upsert({
             type: req.file.mimetype,
             name: req.file.originalname,
             trendID: req.query.trendID,
             data: fs.readFileSync(
                 __basedir + "/resources/static/assets/uploads/" + req.file.filename
             ),
-        }).then((image) => {
+        }).then(([image, created]) => {
             fs.writeFileSync(
                 __basedir + "/resources/static/assets/tmp/" + image.name,
                 image.data
             );
-            return res.send(`File has been uploaded.`);
+            return res.send("File upload sucessful.");
         });
     } catch (error) {
         console.log(error);

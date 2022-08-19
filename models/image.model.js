@@ -2,10 +2,6 @@ const {Sequelize, DataTypes} = require('@sequelize/core');
 
 module.exports = (sequelize) => {
     const Image = sequelize.define('image', {
-        // id: {
-        //     type: DataTypes.INTEGER,
-        //     primaryKey: true,
-        // },
         type: {
             type: DataTypes.STRING,
         },
@@ -17,6 +13,8 @@ module.exports = (sequelize) => {
         },
         trendID: {
             type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: false,
         }
     });
     return Image;

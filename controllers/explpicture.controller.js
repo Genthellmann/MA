@@ -8,7 +8,7 @@ exports.uploadPicture = async (req, res) => {
         if (req.file == undefined) {
             return res.send(`You must select a file.`);
         }
-        Explpicture.create({
+        Explpicture.upsert({
             type: req.file.mimetype,
             name: req.file.originalname,
             trendID: req.query.trendID,
@@ -16,12 +16,12 @@ exports.uploadPicture = async (req, res) => {
             data: fs.readFileSync(
                 __basedir + "/resources/static/assets/uploads/" + req.file.filename
             ),
-        }).then((explpicture) => {
+        }).then(([explpicture, created]) => {
             fs.writeFileSync(
                 __basedir + "/resources/static/assets/tmp/" + explpicture.name,
                 explpicture.data
             );
-            return res.send(`File has been uploaded.`);
+            return res.send("File upload sucessful.");
         });
     } catch (error) {
         console.log(error);
@@ -37,6 +37,17 @@ exports.returnPicture = async (req, res) => {
                 trendID: req.query.trendID,
             }
         }).then((result) => res.json(result))
+    } catch (error) {
+        console.log(error);
+        return res.send(`Error when trying to return image: ${error}`);
+    }
+};
+
+exports.returnOnePicture = async (req, res) => {
+    const id = req.params.id;
+    try {
+        Explpicture.findByPk(id)
+            .then((result) => res.json(result))
     } catch (error) {
         console.log(error);
         return res.send(`Error when trying to return image: ${error}`);

@@ -16,6 +16,8 @@ module.exports = (sequelize) => {
         },
         refID: {
             type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: false,
         }
     });
     return Explpicture;
