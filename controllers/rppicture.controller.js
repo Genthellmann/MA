@@ -56,15 +56,16 @@ exports.returnOnePicture = async (req, res) => {
 };
 
 exports.deletePicture = async (req,res) =>{
+    const id = req.params.id
     try{
         Rppicture.destroy({
             where: {
-                trendID: req.query.trendID,
+                refID: id,
             }
-        }).then(res.send(`picture deleted ID: ${req.query.trendID}`))
+        }).then(res.send(`Image deleted ID: ${id}`))
     } catch(error){
         console.log(error);
-        return res.send(`Error when trying to delete image: ${error}`);
+        return res.send(`Error when trying to delete image ID: ${id}`);
     }
 };
 

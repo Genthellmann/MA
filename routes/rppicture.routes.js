@@ -12,7 +12,7 @@ router.get("", AuthenticateToken, rppictureController.returnPicture);
 router.get("/:id", AuthenticateToken, rppictureController.returnOnePicture);
 
 router.post("", upload.single("file"), rppictureController.uploadPicture);
-router.delete("", AuthenticateToken, rppictureController.deletePicture);
+router.delete("/:id", AuthenticateToken, rppictureController.deletePicture);
 
 // delete all picture for trend id:
 router.delete("/all", AuthenticateToken, rppictureController.deleteAllPictures)
