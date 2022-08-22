@@ -12,6 +12,7 @@ const projectRouter = require("./routes/project.routes");
 const referenceRouter = require("./routes/reference.routes");
 const explpictureRouter = require("./routes/explpicture.routes");
 const rppictureRouter = require("./routes/rppicture.routes");
+const vpaRouter = require("./routes/vpa.routes");
 
 
 //database
@@ -25,7 +26,7 @@ User.sync({ force: true }) - This creates the table, dropping it first if it alr
 User.sync({ alter: true }) - This checks what is the current state of the table in the database (which columns it has, what are their data types, etc), and then performs the necessary changes in the table to make it match the model.
 */
 
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync().then(() => {
 
     console.log("Synced db.");
 })
@@ -55,6 +56,7 @@ app.use("/projects", projectRouter);
 app.use("/reference", referenceRouter);
 app.use("/explpicture", explpictureRouter);
 app.use("/rppicture", rppictureRouter);
+app.use("/vpa", vpaRouter);
 
 
 

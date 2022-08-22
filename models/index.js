@@ -23,5 +23,6 @@ db.project = require("./project.model")(sequelize,Sequelize);
 db.reference = require("./reference.model")(sequelize,Sequelize);
 db.rppicture = require("./rppicture.model")(sequelize,Sequelize);
 db.explpicture = require("./explpicture.model")(sequelize,Sequelize);
+db.vpa = require("./vpa.model")(sequelize,Sequelize);
 
 module.exports = db;
