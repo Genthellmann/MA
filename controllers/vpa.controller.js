@@ -46,6 +46,18 @@ exports.findAll = (req, res) => {
         });
 };
 
+exports.bulkUpdate = (req, res) => {
+    Vpa.bulkCreate(req.body, {
+        updateOnDuplicate: ["id", "content", "trendID", "xpos", "ypos"]
+    })
+        .then(result => res.json(result))
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Vpa element with id=" + id
+            });
+        });
+}
+
 
 exports.update = (req, res) => {
     const id = req.params.id;

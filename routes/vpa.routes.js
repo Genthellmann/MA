@@ -14,4 +14,7 @@ router.post("", AuthenticateToken, VpaController.create);
 //update Vpa element with id
 router.put("/:id", AuthenticateToken, VpaController.update);
 
+//create/updatemultiple
+router.post("/multiple", AuthenticateToken, VpaController.bulkUpdate);
+
 module.exports = router;
