@@ -5,9 +5,9 @@ const {Op, QueryTypes} = require("sequelize")
 
 exports.create = (req,res) => {
     //Validate request
-    if(!req.body.content){
+    if(!req.body.trendID){
         res.status(400).send({
-            message: "Content can not be empty!"
+            message: "Trend ID has to be set"
         });
         return;
     }

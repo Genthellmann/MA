@@ -13,6 +13,7 @@ const referenceRouter = require("./routes/reference.routes");
 const explpictureRouter = require("./routes/explpicture.routes");
 const rppictureRouter = require("./routes/rppicture.routes");
 const vpaRouter = require("./routes/vpa.routes");
+const benchmarkRouter = require("./routes/benchmark.routes");
 
 
 //database
@@ -57,6 +58,7 @@ app.use("/reference", referenceRouter);
 app.use("/explpicture", explpictureRouter);
 app.use("/rppicture", rppictureRouter);
 app.use("/vpa", vpaRouter);
+app.use("/benchmark", benchmarkRouter);
 
 
 

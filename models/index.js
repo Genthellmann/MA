@@ -14,6 +14,7 @@ const sequelize = new Sequelize(dbConfig.db_img.database, dbConfig.db_img.user, 
         idle: dbConfig.db_img.pool.idle,
     },
 });
+
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -24,5 +25,6 @@ db.reference = require("./reference.model")(sequelize,Sequelize);
 db.rppicture = require("./rppicture.model")(sequelize,Sequelize);
 db.explpicture = require("./explpicture.model")(sequelize,Sequelize);
 db.vpa = require("./vpa.model")(sequelize,Sequelize);
+db.benchmark = require("./benchmark.model")(sequelize,Sequelize);
 
 module.exports = db;
