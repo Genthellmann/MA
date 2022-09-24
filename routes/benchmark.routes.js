@@ -12,7 +12,7 @@ router.put("/:id", AuthenticateToken, benchmarkController.update);
 router.delete("/:id", AuthenticateToken, benchmarkController.delete);
 
 // Retrieve all benchmarks for trend with id
-router.get("/all/:id", AuthenticateToken, benchmarkController.findAll);
+router.get("/all/:trendID", AuthenticateToken, benchmarkController.findAll);
 
 // // Retrieve all reference with id
 // router.get("/:id", AuthenticateToken, referenceController.findOne);

@@ -79,7 +79,7 @@ exports.delete = (req, res) => {
 
 exports.findAll = (req, res) => {
     console.log(req.params)
-    const trendID = req.params.id;
+    const trendID = req.params.trendID;
     var condition =  { trendID: { [Op.eq]: trendID } };
     Benchmark.findAll({ where: condition })
         .then(data => {

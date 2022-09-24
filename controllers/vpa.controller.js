@@ -53,7 +53,25 @@ exports.bulkUpdate = (req, res) => {
         .then(result => res.json(result))
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Vpa element with id=" + id
+                message: "Error updating Vpa elements with id=" + id
+            });
+        });
+}
+
+
+exports.multipleDelete = (req, res) => {
+    console.log(req.headers)
+    console.log(req.data)
+    console.log(req.body)
+    const ids = req.body.ids
+    console.log(ids)
+    Vpa.destroy({
+        where: { id: ids }
+    })
+        .then(result => res.json(result))
+        .catch(err => {
+            res.status(500).send({
+                message: "Error deleting Vpa element with id=" + ids
             });
         });
 }

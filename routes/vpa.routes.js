@@ -17,4 +17,7 @@ router.put("/:id", AuthenticateToken, VpaController.update);
 //create/updatemultiple
 router.post("/multiple", AuthenticateToken, VpaController.bulkUpdate);
 
+//delete multiple
+router.post("/deleteMultiple", AuthenticateToken, VpaController.multipleDelete)
+
 module.exports = router;

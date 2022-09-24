@@ -19,7 +19,7 @@ exports.uploadFiles = async (req, res) => {
                 __basedir + "/resources/static/assets/tmp/" + image.name,
                 image.data
             );
-            return res.send("File upload sucessful.");
+            return res.send("File upload successful.");
         });
     } catch (error) {
         console.log(error);

@@ -93,3 +93,26 @@ exports.update = (req, res) => {
         });
 };
 
+exports.delete = (req, res) => {
+    const id = req.params.id;
+    Project.destroy({
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Project deleted successfully!"
+                });
+            } else {
+                res.send({
+                    message: `Cannot delete Project with id=${id}. Maybe Benchmark not found!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete Project with id=" + id
+            });
+        });
+};
+

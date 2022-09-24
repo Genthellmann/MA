@@ -14,6 +14,8 @@ const explpictureRouter = require("./routes/explpicture.routes");
 const rppictureRouter = require("./routes/rppicture.routes");
 const vpaRouter = require("./routes/vpa.routes");
 const benchmarkRouter = require("./routes/benchmark.routes");
+const stratPosRouter = require("./routes/stratpos.routes");
+
 
 
 //database
@@ -59,6 +61,7 @@ app.use("/explpicture", explpictureRouter);
 app.use("/rppicture", rppictureRouter);
 app.use("/vpa", vpaRouter);
 app.use("/benchmark", benchmarkRouter);
+app.use("/stratpos", stratPosRouter);
 
 
 

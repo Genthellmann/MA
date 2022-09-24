@@ -12,6 +12,8 @@ router.get("/:id", AuthenticateToken, project.findAll);
 //Also delete project for specific user
 router.put("/:id", AuthenticateToken, project.update);
 
+router.delete("/:id", AuthenticateToken, project.delete)
+
 // // Retrieve a single Trend with id
 // router.get("/:id", AuthenticateToken, crud.findOne);
 //

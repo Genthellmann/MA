@@ -37,6 +37,40 @@ exports.create = (req,res) => {
         });
 };
 
+// exports.create = (req,res) => {
+//     // const authHeader = req.headers['authorization']
+//     // const token = authHeader && authHeader.split(' ')[1]
+//     // console.log("create token " + token)
+//
+//     //Validate request
+//     if(!req.body.rproduct){
+//         res.status(400).send({
+//             message: "Content can not be empty!"
+//         });
+//         return;
+//     }
+//
+//     console.log(req.body)
+//
+//     const reference = {
+//         trendID: req.body.trendID,
+//         rproduct: req.body.rproduct,
+//         rsystemelements: req.body.rsystemelements,
+//         usabilityattributes: req.body.usabilityattributes,
+//     }
+//     //save Project to db
+//     Reference.upsert(reference)
+//         .then(data => {
+//             res.send(data);
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//                 message:
+//                     err.message || "Error while creating Reference Product."
+//             });
+//         });
+// };
+
 
 exports.update = (req, res) => {
     const id = req.params.id;
