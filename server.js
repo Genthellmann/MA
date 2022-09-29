@@ -42,7 +42,15 @@ global.__basedir = __dirname;
 
 // use cors
 const cors = require('cors')
-var corsOptions = { origin: "http://localhost:3000" };
+
+
+//================================================
+//change when switching host
+//================================================
+// var corsOptions = { origin: "https://ux-trendradar.de"};
+var corsOptions = {origin: "http://localhost:3000"};
+
+
 app.use(cors(corsOptions))
 
 //parse requests from type -application/json

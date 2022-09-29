@@ -19,9 +19,18 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}));
 
 // use cors
+
+//================================================
+//change when switching host
+//================================================
 const cors = require('cors')
+
+// var corsOptions = {origin: "https://ux-trendradar.de"};
 var corsOptions = {origin: "http://localhost:3000"};
+
 app.use(cors(corsOptions))
+
+
 
 //TO DO: Store refresh token in db
 let refreshTokens = []
