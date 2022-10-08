@@ -15,6 +15,7 @@ exports.create = (req,res) => {
         trendID: req.body.trendID,
         ux: req.body.ux,
         rse: req.body.rse,
+        note: req.body.note,
     }
     //save Project to db
     Benchmark.create(benchmark)

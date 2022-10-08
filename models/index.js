@@ -27,5 +27,7 @@ db.explpicture = require("./explpicture.model")(sequelize,Sequelize);
 db.vpa = require("./vpa.model")(sequelize,Sequelize);
 db.benchmark = require("./benchmark.model")(sequelize,Sequelize);
 db.stratpos = require("./stratPos.model")(sequelize,Sequelize);
+db.attribute = require("./Attributes.model")(sequelize,Sequelize);
+
 
 module.exports = db;

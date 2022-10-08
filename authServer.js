@@ -25,8 +25,8 @@ app.use(express.urlencoded({extended:true}));
 //================================================
 const cors = require('cors')
 
-// var corsOptions = {origin: "https://ux-trendradar.de"};
-var corsOptions = {origin: "http://localhost:3000"};
+var corsOptions = {origin: "https://ux-trendradar.de"};
+// var corsOptions = {origin: "http://localhost:3000"};
 
 app.use(cors(corsOptions))
 

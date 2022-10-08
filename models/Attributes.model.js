@@ -1,7 +1,7 @@
 const {Sequelize, DataTypes} = require('@sequelize/core');
 
 module.exports = (sequelize) => {
-    const Benchmark = sequelize.define('benchmark', {
+    const Attribute = sequelize.define('attribute', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -10,15 +10,9 @@ module.exports = (sequelize) => {
         trendID: {
             type: DataTypes.INTEGER,
         },
-        ux: {
+        title: {
             type: DataTypes.STRING,
         },
-        rse: {
-            type: DataTypes.STRING,
-        },
-        note: {
-            type: DataTypes.STRING,
-        }
     });
-    return Benchmark;
+    return Attribute;
 };

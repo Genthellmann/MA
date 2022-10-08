@@ -1,5 +1,6 @@
 //user authentication
 require('dotenv').config()
+let createError = require('http-errors');
 
 const express = require("express");
 const app = express();
@@ -15,6 +16,7 @@ const rppictureRouter = require("./routes/rppicture.routes");
 const vpaRouter = require("./routes/vpa.routes");
 const benchmarkRouter = require("./routes/benchmark.routes");
 const stratPosRouter = require("./routes/stratpos.routes");
+const attributesRouter = require("./routes/attributes.routes");
 
 
 
@@ -29,7 +31,7 @@ User.sync({ force: true }) - This creates the table, dropping it first if it alr
 User.sync({ alter: true }) - This checks what is the current state of the table in the database (which columns it has, what are their data types, etc), and then performs the necessary changes in the table to make it match the model.
 */
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ alter: true }).then(() => {
 
     console.log("Synced db.");
 })
@@ -47,8 +49,9 @@ const cors = require('cors')
 //================================================
 //change when switching host
 //================================================
-// var corsOptions = { origin: "https://ux-trendradar.de"};
-var corsOptions = {origin: "http://localhost:3000"};
+
+var corsOptions = { origin: "https://ux-trendradar.de"};
+// var corsOptions = {origin: "http://localhost:3000"};
 
 
 app.use(cors(corsOptions))
@@ -70,15 +73,23 @@ app.use("/rppicture", rppictureRouter);
 app.use("/vpa", vpaRouter);
 app.use("/benchmark", benchmarkRouter);
 app.use("/stratpos", stratPosRouter);
+app.use("/attributes", attributesRouter );
 
 
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    next(createError(404));
+});
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
     console.error(err.message, err.stack);
+
+    //render error page
     res.status(statusCode).json({ message: err.message });
     return;
+
 });
 
 //set port, listen for requests

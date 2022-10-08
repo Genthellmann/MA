@@ -16,8 +16,14 @@ module.exports = (sequelize) => {
             rsystemelements:{
                 type: DataTypes.TEXT('long'),
             },
+            // usabilityattributes:{
+            //     type: DataTypes.TEXT('long'),
+            // },
             usabilityattributes:{
-                type: DataTypes.TEXT('long'),
+                type: DataTypes.JSON,
+            },
+            prior: {
+                type: DataTypes.INTEGER,
             },
         }
     );

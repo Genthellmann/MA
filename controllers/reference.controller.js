@@ -11,7 +11,7 @@ exports.create = (req,res) => {
     //Validate request
     if(!req.body.rproduct){
         res.status(400).send({
-            message: "Content can not be empty!"
+            message: "Reference Product can not be empty!"
         });
         return;
     }
@@ -23,6 +23,7 @@ exports.create = (req,res) => {
         rproduct: req.body.rproduct,
         rsystemelements: req.body.rsystemelements,
         usabilityattributes: req.body.usabilityattributes,
+        prior: req.body.prior,
     }
     //save Project to db
     Reference.create(reference)
